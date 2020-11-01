@@ -1,5 +1,4 @@
 import {
-  createAction,
   createFeatureSelector,
   createReducer,
   createSelector,
@@ -11,7 +10,7 @@ import * as ProductActions from './product.actions';
 
 export interface ProductState {
   showProductCode: boolean;
-  currentProductId: number;
+  currentProduct: Product;
   products: Product[];
 }
 
@@ -21,7 +20,7 @@ export interface State extends AppState.State {
 
 const initialState: ProductState = {
   showProductCode: true,
-  currentProductId: null,
+  currentProduct: null,
   products: [],
 };
 
@@ -32,16 +31,17 @@ export const getShowProductCode = createSelector(
   (state) => state.showProductCode
 );
 
-export const getCurrentProductId = createSelector(
-  getProductFeatureState,
-  (state) => state.currentProductId
-);
+// export const getCurrentProductId = createSelector(
+//   getProductFeatureState,
+//   (state) => state.currentProductId
+// );
 
 export const getCurrentProduct = createSelector(
   getProductFeatureState,
-  getCurrentProductId,
-  (state, currentProductId) =>
-    state.products.find((product) => product.id === currentProductId)
+  // getCurrentProductId,
+  // (state, currentProductId) =>
+  //   state.products.find((product) => product.id === currentProductId)
+  (state) => state.currentProduct
 );
 
 export const getProducts = createSelector(
@@ -57,5 +57,26 @@ export const productReducer = createReducer<ProductState>(
       ...state,
       showProductCode: !state.showProductCode,
     })
-  )
+  ),
+  on(
+    ProductActions.setCurrentProduct,
+    (state, action): ProductState => ({
+      ...state,
+      currentProduct: action.product,
+    })
+  ),
+  on(ProductActions.clearCurrentProduct, (state) => ({
+    ...state,
+    currentProduct: null,
+  })),
+  on(ProductActions.initializeCurrentProduct, (state) => ({
+    ...state,
+    currentProduct: {
+      id: 0,
+      productName: '',
+      productCode: 'New',
+      description: '',
+      starRating: 0,
+    },
+  }))
 );
