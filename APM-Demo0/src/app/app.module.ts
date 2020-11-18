@@ -46,3 +46,5 @@ import { EffectsModule } from '@ngrx/effects';
   bootstrap: [AppComponent],
 })
 export class AppModule {}
+
+// 8강까지 함.
