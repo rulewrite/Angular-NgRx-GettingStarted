@@ -47,4 +47,4 @@ import { EffectsModule } from '@ngrx/effects';
 })
 export class AppModule {}
 
-// 8강까지 함.
+// 9강까지 함.
