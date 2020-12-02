@@ -26,7 +26,7 @@ export class ProductEffects {
     );
   });
 
-  updateProducts$ = createEffect(() => {
+  updateProduct$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(ProductActions.updateProduct),
       concatMap((action) =>
