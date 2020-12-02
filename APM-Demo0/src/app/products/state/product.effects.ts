@@ -40,7 +40,7 @@ export class ProductEffects {
     );
   });
 
-  deleteProdcut$ = createEffect(() => {
+  deleteProduct$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(ProductActions.deleteProduct),
       mergeMap((action) =>
