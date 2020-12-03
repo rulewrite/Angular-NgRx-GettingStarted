@@ -7,7 +7,7 @@ import {
   State,
   getProducts,
   getError,
-} from '../state/product.reducer';
+} from '../state';
 import * as ProductActions from '../state/product.actions';
 import { Observable } from 'rxjs';
 
