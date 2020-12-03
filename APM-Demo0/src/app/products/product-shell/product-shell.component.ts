@@ -8,7 +8,7 @@ import {
   getProducts,
   getError,
 } from '../state';
-import * as ProductActions from '../state/product.actions';
+import { ProductPageActions } from '../state/actions';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -28,20 +28,20 @@ export class ProductShellComponent implements OnInit {
     this.selectedProduct$ = this.store.select(getCurrentProduct);
     this.displayCode$ = this.store.select(getShowProductCode);
 
-    this.store.dispatch(ProductActions.loadProducts());
+    this.store.dispatch(ProductPageActions.loadProducts());
   }
 
   checkChanged(): void {
-    this.store.dispatch(ProductActions.toggleProductCode());
+    this.store.dispatch(ProductPageActions.toggleProductCode());
   }
 
   newProduct(): void {
-    this.store.dispatch(ProductActions.initializeCurrentProduct());
+    this.store.dispatch(ProductPageActions.initializeCurrentProduct());
   }
 
   productSelected(product: Product): void {
     this.store.dispatch(
-      ProductActions.setCurrentProduct({ currentProductId: product.id })
+      ProductPageActions.setCurrentProduct({ currentProductId: product.id })
     );
   }
 }

@@ -8,7 +8,7 @@ import { NumberValidators } from '../../shared/number.validator';
 
 import { Store } from '@ngrx/store';
 import { getCurrentProduct, State } from '../state';
-import * as ProductActions from '../state/product.actions';
+import { ProductPageActions } from '../state/actions';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 
@@ -124,12 +124,12 @@ export class ProductEditComponent implements OnInit {
     if (product && product.id) {
       if (confirm(`Really delete the product: ${product.productName}?`)) {
         this.store.dispatch(
-          ProductActions.deleteProduct({ productId: product.id })
+          ProductPageActions.deleteProduct({ productId: product.id })
         );
       }
     } else {
       // No need to delete, it was never saved
-      this.store.dispatch(ProductActions.clearCurrentProduct());
+      this.store.dispatch(ProductPageActions.clearCurrentProduct());
     }
   }
 
@@ -142,9 +142,9 @@ export class ProductEditComponent implements OnInit {
         const product = { ...originalProduct, ...this.productForm.value };
 
         if (product.id === 0) {
-          this.store.dispatch(ProductActions.createProduct({ product }));
+          this.store.dispatch(ProductPageActions.createProduct({ product }));
         } else {
-          this.store.dispatch(ProductActions.updateProduct({ product }));
+          this.store.dispatch(ProductPageActions.updateProduct({ product }));
         }
       }
     }
